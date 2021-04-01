@@ -1,0 +1,30 @@
+objects/api_interface.o: ./sdl2/api_interface.c
+	@echo -e "compiling [032m[gcc][0m":  ./sdl2/api_interface.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/sdl_api.o: ./sdl2/sdl_api.c
+	@echo -e "compiling [032m[gcc][0m":  ./sdl2/sdl_api.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/debug.o: ./com_private/debug/debug.c
+	@echo -e "compiling [032m[gcc][0m":  ./com_private/debug/debug.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/list.o: ./com_private/app_list/list.c
+	@echo -e "compiling [032m[gcc][0m":  ./com_private/app_list/list.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/list_test.o: ./com_private/app_list/list_test/list_test.c
+	@echo -e "compiling [032m[gcc][0m":  ./com_private/app_list/list_test/list_test.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/cmd_list.o: ./com_private/cmd_list.c
+	@echo -e "compiling [032m[gcc][0m":  ./com_private/cmd_list.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/hash.o: ./com_private/hash/hash.c
+	@echo -e "compiling [032m[gcc][0m":  ./com_private/hash/hash.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/player.o: ./com_private/media/player.c
+	@echo -e "compiling [032m[gcc][0m":  ./com_private/media/player.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/common.o: ./com_private/com/common.c
+	@echo -e "compiling [032m[gcc][0m":  ./com_private/com/common.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/main.o: main.c
+	@echo -e "compiling [032m[gcc][0m":  main.c
+	@gcc $(CFLAGS) -c -o $@ $^
