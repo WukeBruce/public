@@ -17,17 +17,17 @@ typedef enum
 extern LOG_LEVEL_E g_pri_log_level;
 
 #ifdef PRI_DEBUG
-#define COM_ERROR(...)	do{if(g_pri_log_level <= COM_LOG_ERROR){\
-								printf("---ERROR![%s,%d] ",__FUNCTION__,__LINE__);\
+#define COM_ERROR(...)	do{if( COM_LOG_ERROR <=  g_pri_log_level){\
+								printf("\033[031m ---ERROR![%s,%d] \033[0m ",__FUNCTION__,__LINE__);\
 								printf(__VA_ARGS__);}\
 							}while(0)
 
-#define COM_DEBUG(...)	do{if(g_pri_log_level <= COM_LOG_DEBUG){\
-								printf("-DEBUG-[%s,%d] ",__FUNCTION__,__LINE__);\
+#define COM_DEBUG(...)	do{if( COM_LOG_DEBUG <=  g_pri_log_level){\
+								printf("\033[034m -DEBUG-[%s,%d] \033[0m ",__FUNCTION__,__LINE__);\
 								printf(__VA_ARGS__);}\
 							}while(0)
-#define COM_INFO(...)	do{if(g_pri_log_level <= COM_LOG_INFO){\
-								printf("--INFO-[%s,%d] ",__FUNCTION__,__LINE__);\
+#define COM_INFO(...)	do{if( COM_LOG_INFO <=  g_pri_log_level){\
+								printf("\033[032m --INFO-[%s,%d] \033[0m ",__FUNCTION__,__LINE__);\
 								printf(__VA_ARGS__);}\
 							}while(0)
 
@@ -40,7 +40,7 @@ extern LOG_LEVEL_E g_pri_log_level;
                     			if (i != 0 && (i%16) == 0) { \
                     				printf("\n[API-COM]\t"); \
                     			}  \
-                    			printf("0x%02x,", (data)[i]); \
+                    			printf("\033[034m 0x%02x,\033[0m ", (data)[i]); \
                     		}\
                     		printf("\n[API-COM]\t%s End\n", (mark)); \
                     	} \

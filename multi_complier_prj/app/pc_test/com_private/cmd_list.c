@@ -62,6 +62,13 @@ static int cmd_print_size(int argc, char *argv[])
 	return 0;
 }
 
+static int cmd_player(int argc, char *argv[])
+{
+	COM_INFO("file: %s argc: %d argv:%s\n",__FILE__,argc,argv[0]);
+    simple_player_test(argc, argv);
+
+    return 0;
+}
 
 cmd_node_t cmdtable[] = {
 	{"help"         , cmd_help,            "help [cmd]"                                 },
@@ -73,6 +80,7 @@ cmd_node_t cmdtable[] = {
 	{"crc32"        , cmd_test_crc32,      "crc32 : crc32 algorithm test"       },
 	{"hash"         , cmd_hash_table,      "hash : hash table test"       },
 	{"psize"         , cmd_print_size,     "psize : out the size B K M G T "       },
+	{"player"       , cmd_player,          "player : simple play test"              },
 
 
 	{NULL, NULL, NULL}

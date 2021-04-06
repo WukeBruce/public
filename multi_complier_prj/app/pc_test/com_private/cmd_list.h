@@ -20,6 +20,8 @@ extern int search_array_max_min_test(void);
 extern 	void list_test(void);
 extern int print_size_test(void);
 extern int sdl_api_test(void);
+extern int simple_player_test(int argc, char* argv[]);
+
 
 int cmd_help(int argc, char *argv[]);
 int crc32_algorithm_test(void);

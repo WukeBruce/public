@@ -120,6 +120,7 @@ $(LIB): objects $(OBJS)
 
 ifeq ($(OS), linux)
 $(BIN): $(OBJS)
+	@echo "$(LDFLAGS)"
 	$(LD) $(OBJS) $(LDFLAGS) $(LIBS) -o $@
 	rm -rf output
 	mkdir -p output
