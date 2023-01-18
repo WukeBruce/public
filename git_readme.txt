@@ -1,4 +1,5 @@
 1  git clone git@github.com:WukeBruce/brucehuge.git
+   git clone git@github.com:WukeBruce/public.git
 2  git init
 3  git b 
 4  git co

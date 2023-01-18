@@ -66,6 +66,44 @@ static int tick_thread(void *data);
  *   GLOBAL FUNCTIONS
  **********************/
 
+    static void btn_event_callback(lv_event_t* event)
+    {
+        static uint32_t counter = 1;
+     
+        printf("click here\n");
+    }
+ 
+
+ void lvgl_button_test(void){
+        lv_obj_t* btn = lv_btn_create(lv_scr_act());  
+        if (btn != NULL)
+        {
+            // lv_obj_set_size(btn, 80, 20);                                                   
+            // lv_obj_set_pos(btn, 90, 200);
+            lv_obj_set_size(btn, 200, 60);              
+            lv_obj_add_event_cb(btn, btn_event_callback, LV_EVENT_CLICKED, NULL);           
+            lv_obj_align(btn, LV_ALIGN_CENTER, 0, 50);                                     
+            lv_obj_set_style_radius(btn, 2, LV_PART_MAIN);      
+            lv_obj_t* btn_label = lv_label_create(btn);                                  
+            if (btn_label != NULL)
+            {
+                lv_label_set_text(btn_label, "button"); 
+                lv_obj_center(btn_label); 
+            }
+        }    
+        return ;   
+ }
+
+void my_demo_widgets(void)
+{
+    //lv_obj_t *view_test = lv_btn_create(NULL);
+    //lv_obj_t * text_t = lv_btn_create(lv_scr_act());
+
+    lvgl_button_test();
+    return ;
+}
+
+
 int main(int argc, char **argv)
 {
   (void)argc; /*Unused*/
@@ -95,11 +133,12 @@ int main(int argc, char **argv)
 //  lv_example_flex_3();
 //  lv_example_label_1();
 
-  lv_demo_widgets();
-//  lv_demo_keypad_encoder();
+ lv_demo_widgets();
+ // lv_demo_keypad_encoder();
 //  lv_demo_benchmark();
 //  lv_demo_stress();
 //  lv_demo_music();
+//        my_demo_widgets();
 
   while(1) {
     /* Periodically call the lv_task handler.
