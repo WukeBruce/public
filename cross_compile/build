@@ -1,0 +1,64 @@
+#/bin/bash
+
+#black
+#red='\E[31m'
+#green='\E[32m'
+#yellow='\E[33m'
+#blue='\E[34m'
+#magenta='\E[35m'
+#cyan='\E[36m'
+#white='\E[37m'
+ 
+#cecho $1:string  $2:color $3:0 1  
+source ./scripts/color.sh
+
+help ()
+{
+	echo " "
+	cecho "please input : ./build  " $red 
+	cecho "`ls conf`" $red 
+	echo " "
+			
+	return
+}
+
+if [ -z "$1"  ];then
+	help
+else
+
+
+	if [ -d ./conf/$1 ];then
+
+		cecho "cp ./conf/$1/env.sh " $green 
+		cecho "cp ./conf/$1/inc.Makefile " $green 
+		
+		cp ./conf/$1/env.sh ./
+		cp ./conf/$1/inc.Makefile ./scripts/inc.Makefile
+
+		if [ "pc" = "$1"  ];then
+			source env.sh i386-linux;
+		fi
+
+		if [ "ck" = "$1"  ];then
+			source env.sh csky-ecos;
+		fi
+		if [ "arm" = "$1"  ];then
+			source env.sh arm-linux;
+		fi
+			for dir_name in ${BUILD_DIR_ARRAY_NAME[*]}; 
+			do 
+				cecho " [$dir_name] Build Start..." $red 1
+				export BUILD_DIR_NAME=$dir_name
+				make clean;
+				make || exit 1;
+
+		    done
+
+		#fi
+	else
+		help
+	fi	
+	
+fi
+
+exit 0
