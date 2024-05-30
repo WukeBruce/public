@@ -31,7 +31,8 @@ if [ "$1" = "i386-linux" ] ; then
 	echo ARCH=i386 OS=linux Configuration  !
 	export ARCH=i386
 	export OS=linux
-	export CROSS_PATH=common_lib
+	#export CROSS_PATH=common_lib
+	export CROSS_PATH=i386-linux
 fi
 
 if [ "$1" = "arm-linux" ] ; then

@@ -1,0 +1,130 @@
+contrib/tools/png-fix-itxt.o: contrib/tools/png-fix-itxt.c \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/stdio.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/features.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_config.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/sys/cdefs.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/lib/gcc/arm-nationalchip-linux-uclibcgnueabihf/4.9.4/include/stddef.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/types.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/wordsize.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/typesizes.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_stdio.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/wchar.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/wchar.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/pthreadtypes.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/endian.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/endian.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/byteswap.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/byteswap.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/byteswap-common.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/byteswap-16.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/lib/gcc/arm-nationalchip-linux-uclibcgnueabihf/4.9.4/include/stdarg.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/stdio_lim.h \
+ /home/wk/hub/public/cross_compile/platform/libpng-1.6.37/../arm-linux///include/zlib.h \
+ /home/wk/hub/public/cross_compile/platform/libpng-1.6.37/../arm-linux///include/zconf.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/lib/gcc/arm-nationalchip-linux-uclibcgnueabihf/4.9.4/include-fixed/limits.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/lib/gcc/arm-nationalchip-linux-uclibcgnueabihf/4.9.4/include-fixed/syslimits.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/limits.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/posix1_lim.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/local_lim.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/linux/limits.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_local_lim.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/posix2_lim.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/sys/types.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/time.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/sys/select.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/select.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/sigset.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/time.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/sys/sysmacros.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/unistd.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/posix_opt.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_posix_opt.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/environments.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/confname.h \
+ /home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/getopt.h
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/stdio.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/features.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_config.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/sys/cdefs.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/lib/gcc/arm-nationalchip-linux-uclibcgnueabihf/4.9.4/include/stddef.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/types.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/wordsize.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/typesizes.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_stdio.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/wchar.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/wchar.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/pthreadtypes.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/endian.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/endian.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/byteswap.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/byteswap.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/byteswap-common.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/byteswap-16.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/lib/gcc/arm-nationalchip-linux-uclibcgnueabihf/4.9.4/include/stdarg.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/stdio_lim.h:
+
+/home/wk/hub/public/cross_compile/platform/libpng-1.6.37/../arm-linux///include/zlib.h:
+
+/home/wk/hub/public/cross_compile/platform/libpng-1.6.37/../arm-linux///include/zconf.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/lib/gcc/arm-nationalchip-linux-uclibcgnueabihf/4.9.4/include-fixed/limits.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/lib/gcc/arm-nationalchip-linux-uclibcgnueabihf/4.9.4/include-fixed/syslimits.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/limits.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/posix1_lim.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/local_lim.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/linux/limits.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_local_lim.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/posix2_lim.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/sys/types.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/time.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/sys/select.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/select.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/sigset.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/time.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/sys/sysmacros.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/unistd.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/posix_opt.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_posix_opt.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/environments.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/confname.h:
+
+/home/wk/gxtools/gcc-nationalchip-4.9.4-2018.11-i686_arm-linux-uclibcgnueabihf/arm-nationalchip-linux-uclibcgnueabihf/sysroot/usr/include/bits/getopt.h:

@@ -11,21 +11,22 @@
 #include <libgen.h>
 #include <unistd.h>
 
-//#include "debugXML.h" 
-//#include "encoding.h" 
-//#include "entities.h" 
-//#include "error.h" 
-//#include "parser.h" 
-//#include "tree.h"
-//#include "api_interface.h"
+#include "allheaders.h"
+
+//picture opterate test
+extern int sharptest(int argc, char **argv);
+extern  int rotatetest(int    argc,char **argv);
+extern int rotate_it(int    argc, char **argv);
+extern int scale_it(int    argc, char **argv);
+
 
 int main(int argc, char **argv)
 {
-	//cmd_create_ini(argc,argv);
-	//api_com_key_interface();
-	//api_sdl_test_message();
-	
-	return 0;
+        //sharptest( argc,  argv);
+        //rotatetest( argc,  argv);
+       //rotate_it( argc,  argv);
+        scale_it( argc,  argv);// ./out.elf zier.jpg 0.5 0.5 wk.jpg 0
+        return 0;
 }
 
 

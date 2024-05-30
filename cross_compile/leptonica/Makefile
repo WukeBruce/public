@@ -4,9 +4,9 @@ SUBDIRS=
 ##############################################################################
 lib_dir=$(BUILD_DIR_NAME)
 
-#SRC += $(shell ls ./$(lib_dir)/www/*.c)
 #SRC += $(shell ls ./$(lib_dir)/magick/*.c)
 SRC += $(shell ls ./$(lib_dir)/*.c)
+SRC += $(shell ls ./test_case/*.c)
 SRC += $(shell ls ./*.c)
 
 #ifeq  ($(DVB_MEDIA_FLAG), yes)
@@ -29,5 +29,5 @@ CFLAGS += -I./$(lib_dir)/coders
 ##############################################################################
 -include  $(COMMON_PRJ_PATH)/scripts/inc.Makefile
 ##############################################################################
-LDFLAGS += -L$(COMMON_LIB_PATH)/lib
+LDFLAGS += -L$(COMMON_LIB_PATH)/lib -ljpeg -lpng -lz
 

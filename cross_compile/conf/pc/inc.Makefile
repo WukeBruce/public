@@ -12,6 +12,7 @@ else
 CFLAGS += -pipe -O0 -g
 endif
 
+CFLAGS += -ffunction-sections -fdata-sections
 
 MAKE    += -s
 MAKEFLAGS += -s
@@ -22,6 +23,7 @@ CFLAGS  += -I$(COMMON_LIB_PATH)/include -I$(COMMON_LIB_PATH)/include/bus  $(TARG
 CFLAGS += -I$(COMMON_LIB_PATH)/include/kernel_include/
 #LIBS += -lgxcore -lz -lrt -Wl --whole-archive -lpthread -Wl --no-whole-archive
 LIBS += -lpthread -W
+LIBS += -Wl,--gc-sections
 LDFLAGS += -static
 endif
 

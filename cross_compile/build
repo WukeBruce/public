@@ -15,7 +15,7 @@ source ./scripts/color.sh
 help ()
 {
 	echo " "
-	cecho "please input : ./build  " $red 
+	cecho "please input : ./build  [op1] [clean]" $red 
 	cecho "`ls conf`" $red 
 	echo " "
 			
@@ -49,8 +49,12 @@ else
 			do 
 				cecho " [$dir_name] Build Start..." $red 1
 				export BUILD_DIR_NAME=$dir_name
-				make clean;
-				make || exit 1;
+					make clean;
+				if [ "clean" = "$2"  ];then
+					cecho " [$dir_name] Clean OK..." $red 1
+				else
+					make || exit 1;
+				fi
 
 		    done
 

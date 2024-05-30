@@ -31,7 +31,8 @@ if [ "$1" = "i386-linux" ] ; then
 	echo ARCH=i386 OS=linux Configuration  !
 	export ARCH=i386
 	export OS=linux
-	export CROSS_PATH=common_lib
+	export CROSS_PATH=i386-linux
+	#export CROSS_PATH=common_lib
 fi
 
 if [ -z "$CROSS_PATH" ] ; then
@@ -46,10 +47,12 @@ export COMMON_PRJ_PATH=`pwd`
 export COMMON_LIB_PATH=$COMMON_PRJ_PATH/platform/$CROSS_PATH
 # linux方案，内核代码路径
 export CHIP=gx3201h
-export BUILD_DIR_NAME=libxml
-export BUILD_DIR_ARRAY_NAME=(libxml)
+#export BUILD_DIR_NAME=libxml
+#export BUILD_DIR_ARRAY_NAME=(libxml)
 #export BUILD_DIR_NAME=leptonica
 #export BUILD_DIR_ARRAY_NAME=(leptonica)
+export BUILD_DIR_NAME=airplay
+export BUILD_DIR_ARRAY_NAME=(airplay)
 # echo export path
 if [ -z "$CROSS_PATH" ] ; then
 	echo "CROSS_PATH is NULL"
