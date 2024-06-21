@@ -35,6 +35,14 @@ if [ "$1" = "i386-linux" ] ; then
 	#export CROSS_PATH=common_lib
 fi
 
+if [ "$1" = "x86-windows" ] ; then
+	echo ARCH=x86 OS=windows Configuration  !
+	export ARCH=x86
+	export OS=windows
+	export CROSS_PATH=x86-windows
+	#export CROSS_PATH=common_lib
+fi
+
 if [ -z "$CROSS_PATH" ] ; then
 	echo -e "\033[31m Config Errror!!! ,please check  ARCH_OS \033[0m"
 	echo "               "              

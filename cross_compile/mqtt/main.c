@@ -42,7 +42,7 @@ void usage(void)
     printf("help!!\n");
     exit(EXIT_FAILURE);
 }
-#define  USE_SSL  0
+#define  USE_SSL  1
 #if USE_SSL
 struct Options
 {
@@ -64,7 +64,7 @@ struct Options
     "ssl://k23b1411.ala.cn-hangzhou.emqxsl.cn:8883",// "ssl://broker.emqx.io:8883", "ssl://k23b1411.ala.cn-hangzhou.emqxsl.cn:8883"
     NULL,
     "tcp://localhost:1884",//
-    "MQTT_test_ubuntu_tool_0001",//"c-client""MQTT_test_ubuntu_tool_0001"
+    "MQTT_test_ubuntu_tool_0001",//"c-client""MQTT_test_ubuntu_tool_0001""MQTT_test_ubuntu_tool_0001" "123456"
     "test1",// test1
     "123456",// 123456
     NULL,
@@ -497,50 +497,7 @@ exit:
     return failures;
 }
 
-#if 0
-int main(int argc, char** argv)
-{
-    int rc = 0;
-    int (*tests[])() = {NULL, test1};
-    int i;
-    unsigned test_i;
 
-    xml = fopen("TEST-test1.xml", "w");
-    fprintf(xml, "<testsuite name=\"test1\" tests=\"%d\">\n", (int)(ARRAY_SIZE(tests) - 1));
-
-    getopts(argc, argv);
-
-    if (options.log)
-    {
-        setenv("MQTT_C_CLIENT_TRACE", "ON", 1);
-        setenv("MQTT_C_CLIENT_TRACE_LEVEL", options.log, 1);
-    }
-
-
-    MyLog(LOGA_INFO, "Running %d iteration(s)", options.iterations);
-
-    for (i = 0; i < options.iterations; ++i)
-    {
-        if (options.test_no == 0)
-        { /* run all the tests */
-            for (test_i = 1; test_i < ARRAY_SIZE(tests); ++test_i)
-                rc += tests[test_i](options); /* return number of failures.  0 = test succeeded */
-        }
-        else
-            rc = tests[options.test_no](options); /* run just the selected test */
-    }
-
-    if (rc == 0)
-        MyLog(LOGA_INFO, "verdict pass");
-    else
-        MyLog(LOGA_INFO, "verdict fail");
-
-    fprintf(xml, "</testsuite>\n");
-    fclose(xml);
-    return rc;
-}
-
-#else
 
 static unsigned int s_nTable[256] =
 {
@@ -914,11 +871,9 @@ void mqtt_sendMsage(MQTTClient c, int qos, char* test_topic)
 int send_topic_bin(struct Options options)
 {
     char* testname = "send_topic_bin";
-
-    char* testtopic = "MQ/gd32/wendu/0001/reserved/topic/test";
+    //char* testtopic = "test1";
+    char* testtopic = "MQ/gd32/ota/0001/reserved/topic/test";
     MQTTClient_connectOptions opts = MQTTClient_connectOptions_initializer;
-   // MQTTClient_willOptions wopts = MQTTClient_willOptions_initializer;
-
     int rc;
 
     failures = 0;
@@ -947,13 +902,12 @@ int send_topic_bin(struct Options options)
 	opts.ssl = &sslopts;
 	opts.ssl->enableServerCertAuth = 0;
     #endif
-    MyLog(LOGA_INFO, "connection:%s,u %s,p%s",options.connection,opts.username,opts.password);
+    MyLog(LOGA_INFO, "connection:%s,u %s,p %s,options.client_id %s",options.connection,opts.username,opts.password,options.client_id);
 
     rc = MQTTClient_create(&test1_c1, options.connection, options.client_id, MQTTCLIENT_PERSISTENCE_DEFAULT, NULL);
     assert("good rc from create", rc == MQTTCLIENT_SUCCESS, "rc was %d\n", rc);
     if (rc != MQTTCLIENT_SUCCESS)
         goto exit;
-
 
     rc = MQTTClient_setCallbacks(test1_c1, (void*)test1_c1, test1_connectionLost, test1_messageArrived, test1_deliveryComplete);
     assert("good rc from setCallbacks",  rc == MQTTCLIENT_SUCCESS, "rc was %d\n", rc);
@@ -969,7 +923,6 @@ int send_topic_bin(struct Options options)
                      "opts.returned.sessionPresent = %d\n", opts.returned.sessionPresent);
     //pub
     MyLog(LOGA_INFO, "pub msage ...");
-
     ota_bin_create_package();
     mqtt_sendMsage(test1_c1, 0,testtopic);
     //sub
@@ -1065,4 +1018,3 @@ int main(int argc, char** argv)
         return rc;
 }
 
-#endif

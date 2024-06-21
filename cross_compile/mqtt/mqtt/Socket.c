@@ -145,7 +145,7 @@ void Socket_outInitialize(void)
 	SocketBuffer_initialize();
 	mod_s.connect_pending = ListInitialize();
 	mod_s.write_pending = ListInitialize();
-	
+
 #if defined(USE_SELECT)
 	mod_s.clientsds = ListInitialize();
 	mod_s.cur_clientsds = NULL;
@@ -387,7 +387,7 @@ SOCKET Socket_getReadySocket(int more_work, int timeout, mutex_type mutex, int* 
 	Paho_thread_lock_mutex(mutex);
 	if (mod_s.clientsds->count == 0)
 		goto exit;
-		
+
 	if (more_work)
 		timeout_ms = 0;
 	else if (timeout >= 0)
@@ -416,7 +416,7 @@ SOCKET Socket_getReadySocket(int more_work, int timeout, mutex_type mutex, int* 
 		memcpy((void*)&(mod_s.rset), (void*)&(mod_s.rset_saved), sizeof(mod_s.rset));
 		memcpy((void*)&(pwset), (void*)&(mod_s.pending_wset), sizeof(pwset));
 		maxfdp1_saved = mod_s.maxfdp1;
-		
+
 		if (maxfdp1_saved == 0)
 		{
 			sock = 0;
@@ -1389,7 +1389,7 @@ int Socket_continueWrites(fd_set* pwset, SOCKET* sock, mutex_type mutex)
 #else
 /**
  *  Continue any outstanding socket writes
- 
+
  *  @param sock in case of a socket error contains the affected socket
  *  @return completion code, 0 or SOCKET_ERROR
  */

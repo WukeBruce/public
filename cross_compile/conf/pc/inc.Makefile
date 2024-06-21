@@ -22,6 +22,7 @@ CFLAGS  += -Wall
 CFLAGS  += -I$(COMMON_LIB_PATH)/include -I$(COMMON_LIB_PATH)/include/bus  $(TARGET_DEFS) -DARCH=$(ARCH) $(WARNING) -I.
 CFLAGS += -I$(COMMON_LIB_PATH)/include/kernel_include/
 #LIBS += -lgxcore -lz -lrt -Wl --whole-archive -lpthread -Wl --no-whole-archive
+CFLAGS += -DOPENSSL
 LIBS += -lpthread -W
 LIBS += -Wl,--gc-sections
 LDFLAGS += -static

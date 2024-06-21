@@ -20,3 +20,8 @@ NFSROOT=/home/gx/nfs
 all:subdirs
 
 endif
+
+ifeq ($(OS), windows)
+#USERDIR=$(shell whoami)
+all:subdirs
+endif

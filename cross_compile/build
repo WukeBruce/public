@@ -39,6 +39,10 @@ else
 			source env.sh i386-linux;
 		fi
 
+		if [ "win" = "$1"  ];then
+			source env.sh x86-windows;
+		fi
+
 		if [ "ck" = "$1"  ];then
 			source env.sh csky-ecos;
 		fi

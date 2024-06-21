@@ -119,7 +119,7 @@ static void uuid_generate( uuid_t out )
 		out[8] = (out[8] & 0x3F) | 0x80;
 	}
 }
-
+#if 0
 /** @brief converts a uuid to a string */
 static void uuid_unparse( uuid_t uu, char *out )
 {
@@ -135,6 +135,7 @@ static void uuid_unparse( uuid_t uu, char *out )
 	}
 	*out = '\0';
 }
+#endif
 #endif /* else if defined(USE_LIBUUID) */
 #endif /* if !(defined(_WIN32) || defined(_WIN64)) */
 
@@ -466,7 +467,7 @@ int WebSocket_connect( networkHandles *net, int ssl, const char *uri)
 #else
 			HTTP_PROTOCOL(0),
 #endif
-			
+
 			(int)hostname_len, uri, port,
 			net->websocket_key,
 			headers_buf ? headers_buf : "");
@@ -790,7 +791,7 @@ char *WebSocket_getRawSocketData(networkHandles *net, size_t bytes, size_t* actu
 	}
 
 	*actual_len = 0;
-	
+
 	// not enough data in the buffer, get data from socket
 #if defined(OPENSSL)
 	if ( net->ssl )
@@ -811,7 +812,7 @@ char *WebSocket_getRawSocketData(networkHandles *net, size_t bytes, size_t* actu
 		frame_buffer_index = 0;
 		frame_buffer_data_len = 0;
 		frame_buffer_len = 0;
-		
+
 		if (frame_buffer)
 		{
 			free (frame_buffer);
@@ -853,11 +854,11 @@ char *WebSocket_getRawSocketData(networkHandles *net, size_t bytes, size_t* actu
 
 		SocketBuffer_complete(net->socket);
 	}
-	else 
+	else
 		goto exit;
 
 	bytes = bytes_requested;
-    
+
 	// if possible, return data from the buffer
 	if (bytes > 0)
 	{
@@ -1030,7 +1031,7 @@ int WebSocket_receiveFrame(networkHandles *net, size_t *actual_len)
 				{
 					rc = TCPSOCKET_INTERRUPTED;
 					goto exit;
-				} 
+				}
 				else if (len < 2u )
 				{
 					rc = TCPSOCKET_INTERRUPTED;
@@ -1073,7 +1074,7 @@ int WebSocket_receiveFrame(networkHandles *net, size_t *actual_len)
 					{
 						rc = SOCKET_ERROR;
 						goto exit;
-					} 
+					}
 					else if (len < 2u )
 					{
 						rc = TCPSOCKET_INTERRUPTED;
@@ -1096,7 +1097,7 @@ int WebSocket_receiveFrame(networkHandles *net, size_t *actual_len)
 					{
 						rc = SOCKET_ERROR;
 						goto exit;
-					} 
+					}
 					else if (len < 8u )
 					{
 						rc = TCPSOCKET_INTERRUPTED;
@@ -1139,7 +1140,7 @@ int WebSocket_receiveFrame(networkHandles *net, size_t *actual_len)
 				{
 					rc = SOCKET_ERROR;
 					goto exit;
-				} 
+				}
 				if (len < payload_len )
 				{
 					rc = TCPSOCKET_INTERRUPTED;
@@ -1275,13 +1276,13 @@ void WebSocket_terminate( void )
 		free( last_frame );
 		last_frame = NULL;
 	}
-	
+
 	if ( frame_buffer )
 	{
 		free( frame_buffer );
 		frame_buffer = NULL;
 	}
-	
+
 	frame_buffer_len = 0;
 	frame_buffer_index = 0;
 	frame_buffer_data_len = 0;

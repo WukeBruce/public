@@ -1,0 +1,93 @@
+objects/Base64.o: ./mqtt/Base64.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/Base64.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/Clients.o: ./mqtt/Clients.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/Clients.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/Heap.o: ./mqtt/Heap.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/Heap.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/LinkedList.o: ./mqtt/LinkedList.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/LinkedList.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/Log.o: ./mqtt/Log.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/Log.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/Messages.o: ./mqtt/Messages.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/Messages.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/MQTTAsync.o: ./mqtt/MQTTAsync.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/MQTTAsync.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/MQTTAsyncUtils.o: ./mqtt/MQTTAsyncUtils.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/MQTTAsyncUtils.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/MQTTClient.o: ./mqtt/MQTTClient.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/MQTTClient.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/MQTTPacket.o: ./mqtt/MQTTPacket.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/MQTTPacket.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/MQTTPacketOut.o: ./mqtt/MQTTPacketOut.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/MQTTPacketOut.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/MQTTPersistence.o: ./mqtt/MQTTPersistence.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/MQTTPersistence.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/MQTTPersistenceDefault.o: ./mqtt/MQTTPersistenceDefault.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/MQTTPersistenceDefault.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/MQTTProperties.o: ./mqtt/MQTTProperties.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/MQTTProperties.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/MQTTProtocolClient.o: ./mqtt/MQTTProtocolClient.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/MQTTProtocolClient.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/MQTTProtocolOut.o: ./mqtt/MQTTProtocolOut.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/MQTTProtocolOut.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/MQTTReasonCodes.o: ./mqtt/MQTTReasonCodes.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/MQTTReasonCodes.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/MQTTTime.o: ./mqtt/MQTTTime.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/MQTTTime.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/MQTTVersion.o: ./mqtt/MQTTVersion.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/MQTTVersion.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/OsWrapper.o: ./mqtt/OsWrapper.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/OsWrapper.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/Proxy.o: ./mqtt/Proxy.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/Proxy.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/SHA1.o: ./mqtt/SHA1.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/SHA1.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/SocketBuffer.o: ./mqtt/SocketBuffer.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/SocketBuffer.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/Socket.o: ./mqtt/Socket.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/Socket.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/SSLSocket.o: ./mqtt/SSLSocket.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/SSLSocket.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/StackTrace.o: ./mqtt/StackTrace.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/StackTrace.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/Thread.o: ./mqtt/Thread.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/Thread.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/Tree.o: ./mqtt/Tree.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/Tree.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/utf-8.o: ./mqtt/utf-8.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/utf-8.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/WebSocket.o: ./mqtt/WebSocket.c
+	@echo -e "compiling [032m[gcc][0m":  ./mqtt/WebSocket.c
+	@gcc $(CFLAGS) -c -o $@ $^
+objects/main.o: ./main.c
+	@echo -e "compiling [032m[gcc][0m":  ./main.c
+	@gcc $(CFLAGS) -c -o $@ $^

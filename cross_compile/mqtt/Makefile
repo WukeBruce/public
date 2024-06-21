@@ -20,6 +20,7 @@ BIN = out.elf
 
 ##############################################################################
 CFLAGS += -I./include
+CFLAGS += -I./include/openssl
 CFLAGS += -I./$(lib_dir) 
 CFLAGS += -I$(COMMON_LIB_PATH)/include/
 #CFLAGS += -I./$(lib_dir)/www
@@ -28,5 +29,5 @@ CFLAGS += -I$(COMMON_LIB_PATH)/include/
 -include  $(COMMON_PRJ_PATH)/scripts/inc.Makefile
 ##############################################################################
 #LDFLAGS += -L$(COMMON_LIB_PATH)/lib -ljpeg -lpng -lz -ldns_sd -lplist-2.0  -lcrypto -ldl
-LDFLAGS += -L$(COMMON_LIB_PATH)/lib -lz -ldl
+LDFLAGS += -L$(COMMON_LIB_PATH)/lib -lz -ldl -lssl -lcrypto -lssl -lcrypto -ldl 
 
