@@ -24,6 +24,12 @@
 #include "MQTTClient.h"
 #include <string.h>
 #include <stdlib.h>
+#include<stdio.h>
+#include<fcntl.h>
+#include<malloc.h>
+#include <time.h>
+
+
 
 #if !defined(_WINDOWS)
   #include <sys/time.h>
@@ -403,102 +409,6 @@ int test1_messageArrived(void* context, char* topicName, int topicLen, MQTTClien
     return 1;
 }
 
-int test1(struct Options options)
-{
-    char* testname = "test1";
-    MQTTClient_connectOptions opts = MQTTClient_connectOptions_initializer;
-    int rc;
-
-    failures = 0;
-    MyLog(LOGA_INFO, "Starting test 1 - clean session and reconnect with session present");
-    fprintf(xml, "<testcase classname=\"test1\" name=\"connectionLost and will messages\"");
-    global_start_time = start_clock();
-
-    opts.keepAliveInterval = 60;
-    opts.cleansession = 1;
-    opts.MQTTVersion = MQTTVERSION_3_1_1;
-    if (options.haconnections != NULL)
-    {
-        opts.serverURIs = options.haconnections;
-        opts.serverURIcount = options.hacount;
-    }
-    if (options.username)
-    {
-        opts.username = options.username;
-    }
-    if (options.password)
-    {
-        opts.password = options.password;
-    }
-
-    rc = MQTTClient_create(&test1_c1, options.connection, options.client_id, MQTTCLIENT_PERSISTENCE_DEFAULT, NULL);
-    assert("good rc from create", rc == MQTTCLIENT_SUCCESS, "rc was %d\n", rc);
-    if (rc != MQTTCLIENT_SUCCESS)
-        goto exit;
-
-    rc = MQTTClient_setCallbacks(test1_c1, (void*)test1_c1, test1_connectionLost, test1_messageArrived, test1_deliveryComplete);
-    assert("good rc from setCallbacks",  rc == MQTTCLIENT_SUCCESS, "rc was %d\n", rc);
-    if (rc != MQTTCLIENT_SUCCESS)
-        goto exit;
-
-    /* Connect to the broker with clean session = true */
-    rc = MQTTClient_connect(test1_c1, &opts);
-    assert("good rc from connect with clean session = true",  rc == MQTTCLIENT_SUCCESS, "rc was %d\n", rc);
-    if (rc != MQTTCLIENT_SUCCESS)
-        goto exit;
-
-    assert("connected, session cleaned", opts.returned.sessionPresent == 0,
-                     "opts.returned.sessionPresent = %d\n", opts.returned.sessionPresent);
-
-    /* Disconnect */
-    rc = MQTTClient_disconnect(test1_c1, 1000);
-    assert("good rc from disconnect",  rc == MQTTCLIENT_SUCCESS, "rc was %d\n", rc);
-    if (rc != MQTTCLIENT_SUCCESS)
-        goto exit;
-
-    MyLog(LOGA_INFO, "Sleeping after session cleaned %d s ...", options.reconnect_period);
-    mysleep(options.reconnect_period);
-
-    /* Connect to the broker with clean session = false */
-    opts.cleansession = 0;
-    rc = MQTTClient_connect(test1_c1, &opts);
-    assert("good rc from connect with clean session = false",  rc == MQTTCLIENT_SUCCESS, "rc was %d\n", rc);
-    if (rc != MQTTCLIENT_SUCCESS)
-        goto exit;
-
-    assert("connected, session clean", opts.returned.sessionPresent == 0,
-                     "opts.returned.sessionPresent = %d\n", opts.returned.sessionPresent);
-
-    /* Disconnect */
-    rc = MQTTClient_disconnect(test1_c1, 1000);
-    assert("good rc from disconnect",  rc == MQTTCLIENT_SUCCESS, "rc was %d\n", rc);
-    if (rc != MQTTCLIENT_SUCCESS)
-        goto exit;
-
-    MyLog(LOGA_INFO, "Sleeping after session persist %d s ...", options.reconnect_period);
-    mysleep(options.reconnect_period);
-
-    /* Connect to the broker with clean session = false, expected to have session */
-    opts.cleansession = 0;
-    rc = MQTTClient_connect(test1_c1, &opts);
-    assert("good rc from second connect with clean session = false",  rc == MQTTCLIENT_SUCCESS, "rc was %d\n", rc);
-    if (rc != MQTTCLIENT_SUCCESS)
-        goto exit;
-
-    assert("connected, session present", opts.returned.sessionPresent == 1,
-                     "opts.returned.sessionPresent = %d\n", opts.returned.sessionPresent);
-
-    MQTTClient_destroy(&test1_c1);
-
-exit:
-    MyLog(LOGA_INFO, "%s: test %s. %d tests run, %d failures.\n",
-            (failures == 0) ? "passed" : "failed", testname, tests, failures);
-    write_test_result();
-    return failures;
-}
-
-
-
 static unsigned int s_nTable[256] =
 {
 0x00000000, 0x04C11DB7, 0x9823B6E, 0xD4326D9, 0x130476DC, 0x17C56B6B, 0x1A864DB2,
@@ -550,13 +460,6 @@ static unsigned int _crc32_value(unsigned char * pBuffer, unsigned int nSize)
 
 static int running;
 
-#if 1
-#include<stdio.h>
-#include<fcntl.h>
-#include<malloc.h>
-#include<string.h>
-#include <time.h>
-#endif
 #define     MAX_LOOP_TIMES      1
 #define     OTA_MSG_LEN      900
 #define     OTA_MSG_CNT      1000
@@ -771,7 +674,7 @@ static char *get_date(void)
 	time_month=(timeinfo->tm_mon + 1);
 
          memset(time_buf,0x0,sizeof(time_buf));
-	sprintf(time_buf,"%04d%02d%02d_%02d%02d",time_year,time_month,timeinfo->tm_mday,timeinfo->tm_hour,timeinfo->tm_min);
+	sprintf(time_buf,"%04d%02d%02d_%02d%02d%02d",time_year,time_month,timeinfo->tm_mday,timeinfo->tm_hour,timeinfo->tm_min,timeinfo->tm_sec);
         return time_buf;
 }
 
@@ -861,7 +764,10 @@ void mqtt_sendMsage(MQTTClient c, int qos, char* test_topic)
                     rc = MQTTClient_publishMessage(c, test_topic, &pubmsg, &dt);
                     assert("Good rc from publish", rc == MQTTCLIENT_SUCCESS, "rc was %d", rc);
                     usleep(300*1000);//300 ms
-                    printf("Send Mesage one time \n");
+
+                    char *p_time=NULL;
+                    p_time = get_date();
+                    printf("--->iterations %d ,cnt %d, time %s send \n",i , j,p_time);
                 }
 	}
 
@@ -871,7 +777,6 @@ void mqtt_sendMsage(MQTTClient c, int qos, char* test_topic)
 int send_topic_bin(struct Options options)
 {
     char* testname = "send_topic_bin";
-    //char* testtopic = "test1";
     char* testtopic = "MQ/gd32/ota/0001/reserved/topic/test";
     MQTTClient_connectOptions opts = MQTTClient_connectOptions_initializer;
     int rc;
