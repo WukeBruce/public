@@ -53,8 +53,9 @@
  *
  * */
 
-
+#if 0
  static const char* libraries[] = {"paho-mqtt3c", "paho-mqtt3cs", "paho-mqtt3a", "paho-mqtt3as"};
+#endif
  static const char* eyecatchers[] = {"MQTTAsyncV3_Version", "MQTTAsyncV3_Timestamp",
  					 "MQTTClientV3_Version", "MQTTClientV3_Timestamp"};
 

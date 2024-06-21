@@ -479,7 +479,7 @@ int SSLSocket_initialize(void)
 		}
 
 #if (OPENSSL_VERSION_NUMBER >= 0x010000000)
-		CRYPTO_THREADID_set_callback(SSLThread_id);
+		//CRYPTO_THREADID_set_callback(SSLThread_id);
 #else
 		CRYPTO_set_id_callback(SSLThread_id);
 #endif
@@ -1042,7 +1042,7 @@ int SSLSocket_putdatas(SSL* ssl, SOCKET socket, char* buf0, size_t buf0len, Pack
 		    	free(bufs.buffers[i]);
 		    	bufs.buffers[i] = NULL;
 		    }
-		}	
+		}
 	}
 exit:
 	FUNC_EXIT_RC(rc);

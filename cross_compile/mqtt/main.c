@@ -64,9 +64,9 @@ struct Options
     "ssl://k23b1411.ala.cn-hangzhou.emqxsl.cn:8883",// "ssl://broker.emqx.io:8883", "ssl://k23b1411.ala.cn-hangzhou.emqxsl.cn:8883"
     NULL,
     "tcp://localhost:1884",//
-    "MQTT_test_ubuntu_tool_0001",//"c-client""MQTT_test_ubuntu_tool_0001""MQTT_test_ubuntu_tool_0001" "123456"
-    "test1",// test1
-    "123456",// 123456
+    "MQTT_test_ubuntu_tool_0001",//"c-client" client_id
+    "test1",// test1 username
+    "123456",// 123456 password
     NULL,
     0,
     0,
@@ -396,7 +396,7 @@ void test1_deliveryComplete(void* context, MQTTClient_deliveryToken token)
 
 int test1_messageArrived(void* context, char* topicName, int topicLen, MQTTClient_message* m)
 {
-    MQTTClient c = (MQTTClient)context;
+    //MQTTClient c = (MQTTClient)context;
     printf("Callback: message received on topic '%s' is '%.*s'.\n", topicName, m->payloadlen, (char*)(m->payload));
     MQTTClient_free(topicName);
     MQTTClient_freeMessage(&m);
@@ -558,7 +558,7 @@ static int running;
 #include <time.h>
 #endif
 #define     MAX_LOOP_TIMES      1
-#define     OTA_MSG_LEN      256
+#define     OTA_MSG_LEN      900
 #define     OTA_MSG_CNT      1000
 #define     PAYLOAD_FULL_LENGTH   (OTA_MSG_LEN - 8-4)
 
@@ -578,7 +578,12 @@ typedef struct mqtt_msg_bin{
     int section_cnt;
 }mqtt_msg_bin_t;
 
-static mqtt_msg_bin_t s_mqtt_msg_data={{0}};
+static mqtt_msg_bin_t s_mqtt_msg_data;
+
+static void mqtt_msg_data_init(void)
+{
+    memset(&s_mqtt_msg_data,0x0,sizeof(mqtt_msg_bin_t));
+}
 
 unsigned int htoi(const char *str)
 {
@@ -616,7 +621,7 @@ unsigned int htoi(const char *str)
 }
 
 //2byte
-void make_ota_head(char *buf)
+void make_ota_head(unsigned char *buf)
 {
 	if(buf == NULL)
 	{
@@ -629,7 +634,6 @@ void make_ota_head(char *buf)
 
 int make_ota_section(unsigned char*p_buf,int length,int section_number)
 {
-	int rest_length = length;
 	unsigned char buf[OTA_MSG_LEN];
 	int i = 0;
 	int write_len = 0;
@@ -661,9 +665,10 @@ int make_ota_section(unsigned char*p_buf,int length,int section_number)
 	write_len = fwrite(buf,1,sizeof(buf),ota_file);
 	if(section_number == total_section)
 	{
-		printf("finish file make");
+		printf("finish file make write_len  %d\n",write_len);
 		fclose(ota_file);
 	}
+    return 0;
 }
 
 
@@ -722,10 +727,10 @@ void make_ota_section_0(int hw_version,int chipid,int sw_version)
 	fwrite(buf,1,sizeof(buf),ota_file);
 }
 
-void make_file_to_ota_bin(char *buf,int length)
+void make_file_to_ota_bin(unsigned char *buf,int length)
 {
 	int i = 0;
-	char *p_data = buf;
+	unsigned char *p_data = buf;
 	int rest_length = length;
 	int finish_length = 0;
 
@@ -774,7 +779,7 @@ int ota_bin_create_package(void)
 {
 	FILE *read_fd = NULL;
          char *src_file= INPUT_FILE;
-         char *src_data = NULL;
+        unsigned char *src_data = NULL;
 	int src_read_len = 0;
 	int file_crc = 0;
          char buf[1024] ={0};
@@ -836,15 +841,10 @@ void mqtt_sendMsage(MQTTClient c, int qos, char* test_topic)
 {
 	MQTTClient_deliveryToken dt;
 	MQTTClient_message pubmsg = MQTTClient_message_initializer;
-	MQTTClient_message* m = NULL;
-         char *p_time=NULL;
-	char* topicName = NULL;
-	int topicLen;
+	//MQTTClient_message* m = NULL;
 	int i = 0;
 	int rc;
 	int iterations = MAX_LOOP_TIMES;
-
-         char OTA_bin_data[OTA_MSG_LEN]={0};
 
 	MyLog(LOGA_INFO, "loop times = %d messages at QoS %d", iterations, qos);
 	pubmsg.qos = qos;
@@ -923,6 +923,8 @@ int send_topic_bin(struct Options options)
                      "opts.returned.sessionPresent = %d\n", opts.returned.sessionPresent);
     //pub
     MyLog(LOGA_INFO, "pub msage ...");
+
+    mqtt_msg_data_init();
     ota_bin_create_package();
     mqtt_sendMsage(test1_c1, 0,testtopic);
     //sub
