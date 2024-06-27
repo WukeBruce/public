@@ -15,12 +15,6 @@
  *    Milan Tucic - Session present test1
  *******************************************************************************/
 
-
-/**
- * @file
- * Tests for the MQ Telemetry MQTT C client
- */
-
 #include "MQTTClient.h"
 #include <string.h>
 #include <stdlib.h>
@@ -28,8 +22,6 @@
 #include<fcntl.h>
 #include<malloc.h>
 #include <time.h>
-
-
 
 #if !defined(_WINDOWS)
   #include <sys/time.h>
@@ -42,13 +34,33 @@
 #endif
 
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
+#define     MAX_LOOP_TIMES      3
+#define     OTA_MSG_LEN      900
+#define     OTA_MSG_CNT      1000
+#define     PAYLOAD_FULL_LENGTH   (OTA_MSG_LEN - 8-4)
+
+//ota data formate
+//head+len+now+last+data+crc
+//2+2+2+2+data+4
+
+#define INPUT_FILE  "gd32_app_src.bin"
+FILE *ota_file=NULL;
+int total_section = 0;
+int cur_section = 0;
+int hw_version = 1;
+int sw_version = 1;
+int chipid = 1;
+typedef struct mqtt_msg_bin{
+    char bin[OTA_MSG_CNT][OTA_MSG_LEN];
+    int section_cnt;
+}mqtt_msg_bin_t;
 
 void usage(void)
 {
     printf("help!!\n");
     exit(EXIT_FAILURE);
 }
-#define  USE_SSL  1
+#define  USE_SSL  0
 #if USE_SSL
 struct Options
 {
@@ -460,27 +472,6 @@ static unsigned int _crc32_value(unsigned char * pBuffer, unsigned int nSize)
 
 static int running;
 
-#define     MAX_LOOP_TIMES      1
-#define     OTA_MSG_LEN      900
-#define     OTA_MSG_CNT      1000
-#define     PAYLOAD_FULL_LENGTH   (OTA_MSG_LEN - 8-4)
-
-//ota data formate
-//head+len+now+last+data+crc
-//2+2+2+2+data+4
-
-#define INPUT_FILE  "gd32_app_src.bin"
-FILE *ota_file=NULL;
-int total_section = 0;
-int cur_section = 0;
-int hw_version = 1;
-int sw_version = 1;
-int chipid = 1;
-typedef struct mqtt_msg_bin{
-    char bin[OTA_MSG_CNT][OTA_MSG_LEN];
-    int section_cnt;
-}mqtt_msg_bin_t;
-
 static mqtt_msg_bin_t s_mqtt_msg_data;
 
 static void mqtt_msg_data_init(void)
@@ -618,14 +609,14 @@ void make_ota_section_0(int hw_version,int chipid,int sw_version)
          memcpy(s_mqtt_msg_data.bin[s_mqtt_msg_data.section_cnt],buf,OTA_MSG_LEN);
          s_mqtt_msg_data.section_cnt++;
 
-	printf("\ndata start\n");
+	printf("\ ndata start \n");
 	for(i=0;i<OTA_MSG_LEN;i++)
 	{
 		if(i%16==0 && i!=0)
 			printf("\n");
 		printf("%02x\t",buf[i]);
 	}
-	printf("\ndata end\n");
+	printf("\n data end \n");
 
 	fwrite(buf,1,sizeof(buf),ota_file);
 }
@@ -677,7 +668,6 @@ static char *get_date(void)
 	sprintf(time_buf,"%04d%02d%02d_%02d%02d%02d",time_year,time_month,timeinfo->tm_mday,timeinfo->tm_hour,timeinfo->tm_min,timeinfo->tm_sec);
         return time_buf;
 }
-
 int ota_bin_create_package(void)
 {
 	FILE *read_fd = NULL;
@@ -687,8 +677,11 @@ int ota_bin_create_package(void)
 	int file_crc = 0;
          char buf[1024] ={0};
          char *p_time=NULL;
-         struct stat statinfo;
 
+         unsigned int  filesize = 0;
+ #if !defined(_WINDOWS)
+         struct stat statinfo;
+#endif
 	read_fd = fopen(src_file,"r");
 	if(read_fd == NULL)
 	{
@@ -707,7 +700,7 @@ int ota_bin_create_package(void)
 		fclose(read_fd);
 		return -1;
 	}
-
+#if !defined(_WINDOWS)
         if(stat(src_file,&statinfo) != 0)
         {
             printf("stat failed for  file %s\n",INPUT_FILE);
@@ -715,9 +708,27 @@ int ota_bin_create_package(void)
 
         }
 
-        src_data = malloc(statinfo.st_size+4); //4×Ö½ÚCRC
-        src_read_len=fread(src_data,1,statinfo.st_size,read_fd);
-        if(src_read_len != statinfo.st_size)
+        filesize = statinfo.st_size;
+#else
+        HANDLE file = CreateFile(src_file, 0, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
+        if (file == INVALID_HANDLE_VALUE) {
+            printf("Cannot open %s\n", src_file);
+            return 1;
+        }
+
+        LARGE_INTEGER size;
+        if (GetFileSizeEx(file, &size)) {
+            printf("Size of %s: %lld bytes\n", src_file, size.QuadPart);
+        } else {
+            printf("Cannot get size of %s\n", src_file);
+        }
+
+        CloseHandle(file);
+        filesize = size.QuadPart;
+#endif
+        src_data = malloc(filesize+4); //4×Ö½ÚCRC
+        src_read_len=fread(src_data,1,filesize,read_fd);
+        if(src_read_len != filesize)
         {
             printf("input data read failed\n");
             goto out;
@@ -739,7 +750,6 @@ int ota_bin_create_package(void)
 	return 0;
 
 }
-
 void mqtt_sendMsage(MQTTClient c, int qos, char* test_topic)
 {
 	MQTTClient_deliveryToken dt;
@@ -747,7 +757,7 @@ void mqtt_sendMsage(MQTTClient c, int qos, char* test_topic)
 	//MQTTClient_message* m = NULL;
 	int i = 0;
 	int rc;
-	int iterations = MAX_LOOP_TIMES;
+	int iterations = 0;
 
 	MyLog(LOGA_INFO, "loop times = %d messages at QoS %d", iterations, qos);
 	pubmsg.qos = qos;
@@ -763,7 +773,7 @@ void mqtt_sendMsage(MQTTClient c, int qos, char* test_topic)
                     //rc = MQTTClient_publish(c, test_topic, pubmsg.payloadlen, pubmsg.payload, pubmsg.qos, pubmsg.retained, &dt);
                     rc = MQTTClient_publishMessage(c, test_topic, &pubmsg, &dt);
                     assert("Good rc from publish", rc == MQTTCLIENT_SUCCESS, "rc was %d", rc);
-                    usleep(300*1000);//300 ms
+                    usleep(1000*1000);//300 ms
 
                     char *p_time=NULL;
                     p_time = get_date();
@@ -771,8 +781,60 @@ void mqtt_sendMsage(MQTTClient c, int qos, char* test_topic)
                 }
 	}
 
+}
+
+void mqtt_subMsage(MQTTClient c, int qos, char* test_topic)
+{
+        int rc;
+        MQTTClient_message* m = NULL;
+        int topicLen;
+        char* subtopic = "MQ/gd32/wendu/0001/reserved/topic/test";
+        char* topicName = NULL;
+        int i =0;
+        int iterations = (5000/50);//5s *60*60*24*1
+
+        MyLog(LOGA_INFO, "test_topic= %s messages at QoS %d sub ok !!!", test_topic, qos);
+        rc = MQTTClient_subscribe(c, subtopic, qos);
+        assert("Good rc from subscribe", rc == MQTTCLIENT_SUCCESS, "rc was %d", rc);
+
+        for (i = 0; i< iterations; ++i)
+        {
+                rc = MQTTClient_receive(c, &topicName, &topicLen, &m, 2000);
+                if (topicName)
+                {
+                    char *p_time=NULL;
+                    p_time = get_date();
+                    printf("--->iterations %d  time %s Recv \n",i ,p_time);
+#if 0
+                    printf("Message received on topic %s is %.*s.\n", topicName, m->payloadlen, (char*)(m->payload));
+                    MQTTClient_free(topicName);
+                    MQTTClient_freeMessage(&m);
+#endif
+                }
+
+
+                usleep(50*1000);//10 ms
+        }
+
+        rc = MQTTClient_unsubscribe(c, subtopic);
+        assert("Unsubscribe successful", rc == MQTTCLIENT_SUCCESS, "rc was %d", rc);
+
+        return ;
+}
+
+void mqtt_SendandRecvMsage(MQTTClient c, int qos, char* test_topic)
+{
+	int i = 0;
+	int iterations = MAX_LOOP_TIMES;
+	for (i = 0; i< iterations; ++i)
+	{
+                mqtt_sendMsage(c, qos, test_topic);
+                mqtt_subMsage(c, qos, test_topic);
+	}
+
         running = 0;
 }
+
 
 int send_topic_bin(struct Options options)
 {
@@ -831,7 +893,8 @@ int send_topic_bin(struct Options options)
 
     mqtt_msg_data_init();
     ota_bin_create_package();
-    mqtt_sendMsage(test1_c1, 0,testtopic);
+    //mqtt_sendMsage(test1_c1, 0,testtopic);
+    mqtt_SendandRecvMsage(test1_c1,0, testtopic);
     //sub
 
    //MyLog(LOGA_INFO, "Sleeping after session cleaned %d s ...", options.reconnect_period);
