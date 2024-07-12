@@ -68,5 +68,5 @@ else
 	fi	
 	
 fi
-
+rm gd32_chipid0001_hw0001_*
 exit 0

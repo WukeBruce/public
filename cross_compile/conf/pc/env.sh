@@ -59,10 +59,10 @@ export CHIP=gx3201h
 #export BUILD_DIR_ARRAY_NAME=(libxml)
 #export BUILD_DIR_NAME=leptonica
 #export BUILD_DIR_ARRAY_NAME=(leptonica)
-#export BUILD_DIR_NAME=airplay
-#export BUILD_DIR_ARRAY_NAME=(airplay)
-export BUILD_DIR_NAME=mqtt
-export BUILD_DIR_ARRAY_NAME=(mqtt)
+export BUILD_DIR_NAME=airplay
+export BUILD_DIR_ARRAY_NAME=(airplay)
+#export BUILD_DIR_NAME=mqtt
+#export BUILD_DIR_ARRAY_NAME=(mqtt)
 # echo export path
 if [ -z "$CROSS_PATH" ] ; then
 	echo "CROSS_PATH is NULL"
