@@ -903,7 +903,7 @@ void mqtt_sendMsage(MQTTClient c, int qos, char* test_topic)
                     //rc = MQTTClient_publish(c, test_topic, pubmsg.payloadlen, pubmsg.payload, pubmsg.qos, pubmsg.retained, &dt);
                     rc = MQTTClient_publishMessage(c, test_topic, &pubmsg, &dt);
                     assert("Good rc from publish", rc == MQTTCLIENT_SUCCESS, "rc was %d", rc);
-                    usleep(300*1000);//300 ms
+                    usleep(1000*1000);//300 ms
                     printf("Send Mesage one time \n");
                 }
 	}

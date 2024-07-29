@@ -60,7 +60,7 @@ void usage(void)
     printf("help!!\n");
     exit(EXIT_FAILURE);
 }
-#define  USE_SSL  0
+#define  USE_SSL  1
 #if USE_SSL
 struct Options
 {
@@ -757,9 +757,9 @@ void mqtt_sendMsage(MQTTClient c, int qos, char* test_topic)
 	//MQTTClient_message* m = NULL;
 	int i = 0;
 	int rc;
-	int iterations = 0;
+	int iterations = 1;// send times
 
-	MyLog(LOGA_INFO, "loop times = %d messages at QoS %d", iterations, qos);
+	MyLog(LOGA_INFO, "pub_topic= %s,loop times = %d messages at QoS %d",test_topic, iterations, qos);
 	pubmsg.qos = qos;
 	pubmsg.retained = 0;
 	for (i = 0; i< iterations; ++i)
@@ -770,8 +770,8 @@ void mqtt_sendMsage(MQTTClient c, int qos, char* test_topic)
                     pubmsg.payload = s_mqtt_msg_data.bin[j];
                     pubmsg.payloadlen = OTA_MSG_LEN;
                     //or
-                    //rc = MQTTClient_publish(c, test_topic, pubmsg.payloadlen, pubmsg.payload, pubmsg.qos, pubmsg.retained, &dt);
-                    rc = MQTTClient_publishMessage(c, test_topic, &pubmsg, &dt);
+                    rc = MQTTClient_publish(c, test_topic, pubmsg.payloadlen, pubmsg.payload, pubmsg.qos, pubmsg.retained, &dt);
+                   //rc = MQTTClient_publishMessage(c, test_topic, &pubmsg, &dt);
                     assert("Good rc from publish", rc == MQTTCLIENT_SUCCESS, "rc was %d", rc);
                     usleep(1000*1000);//300 ms
 
@@ -793,7 +793,7 @@ void mqtt_subMsage(MQTTClient c, int qos, char* test_topic)
         int i =0;
         int iterations = (5000/50);//5s *60*60*24*1
 
-        MyLog(LOGA_INFO, "test_topic= %s messages at QoS %d sub ok !!!", test_topic, qos);
+        MyLog(LOGA_INFO, "subtopic= %s messages at QoS %d sub ok !!!", subtopic, qos);
         rc = MQTTClient_subscribe(c, subtopic, qos);
         assert("Good rc from subscribe", rc == MQTTCLIENT_SUCCESS, "rc was %d", rc);
 
@@ -936,6 +936,7 @@ static void init_signals(void)
 	sigaction(SIGTERM, &sigact, NULL);
 }
 #endif
+
 int main(int argc, char** argv)
 {
 //value
